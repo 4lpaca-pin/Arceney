@@ -13,3 +13,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/Arceney/re
 
 ## 🎖️ Supported Executors
 visit [WEAO](https://weao.gg/)
+
+## 📱 Socials
+- **Website**: https://arceney.cc
+- **Tiktok**: https://www.tiktok.com/@4lpacaLoL
+- **Discord**: https://arceney.cc/discord or https://discord.gg/wPaQZwhMHy
