@@ -114,7 +114,7 @@ return function(MainLoader , SecondLoader , SupportedExternal)
             {
                 Text = "Get Key",
                 Callback = function()
-                    (setclipboard or toclipboard)("https://ads.luarmor.net/get_key?for=KNClinkvertise-NyZRHgKYOfty")
+                    (setclipboard or toclipboard)("https://arceney.cc/key")
                 end,
             },
             {
