@@ -20,6 +20,8 @@ getupvalue = getupvalue or debug.getupvalue;
 getupvalues = getupvalues or debug.getupvalues;
 getconstants = getconstants or debug.getconstants;
 getrawmetatable = getrawmetatable or debug.getrawmetatable;
+getscripthash = getscripthash or get_script_hash;
+getcustomasset = getcustomasset or getsynasset;
 getgenv = getgenv or getfenv;
 
 return function(MainLoader , SecondLoader , SupportedExternal)
@@ -98,9 +100,40 @@ return function(MainLoader , SecondLoader , SupportedExternal)
 
         local test , message = pcall(sdk_api.check_key , tostring(LicenseKey));
 
-        if test and message.code == "KEY_VALID" then
-            return true;
+        if test then
+            
+            if message.code == "KEY_VALID" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Success","CONNECTING TO SERVER");
+                end);
+
+                return true;
+            elseif message.code == "KEY_EXPIRED" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Warning","License Key has expired.");
+                end);
+            elseif message.code == "KEY_BANNED" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Error","You're banned");
+                end);
+            elseif message.code == "KEY_HWID_LOCKED" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Error","Invalid Hardware ID");
+                end);
+            elseif message.code == "KEY_INCORRECT" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Error","Incorrect key. click get key below");
+                end);
+            elseif message.code == "KEY_INVALID" then
+                pcall(function()
+                    LoaderWindow:WLWarning("Error","Invalid License Key");
+                end);
+            end;
+
+            return false;
         end;
+
+        LoaderWindow:WLWarning("Error","AN ERROR");
 
         return false;
     end;
@@ -134,13 +167,9 @@ return function(MainLoader , SecondLoader , SupportedExternal)
 
                         writefile(LicenseKeyCache , LicenseKey);
 
-                        LoaderWindow:WLWarning("Success","Loading Script ...");
-
                         task.wait(0.5);
 
                         return LoaderWindow:CloseWhitelist();
-                    else
-                        LoaderWindow:WLWarning("Error","Invalid License Key");
                     end;
 
                     RateLimit = false;
