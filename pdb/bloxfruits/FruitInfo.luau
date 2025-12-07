@@ -1,4 +1,4 @@
-return local z = {
+return {
     ["ELEMENTS"] = {
         ["Transformation"] = {
             ["Text"] = [=[Can transform]=],
