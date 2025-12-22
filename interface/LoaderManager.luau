@@ -133,12 +133,15 @@ return function(MainLoader , SecondLoader , SupportedExternal)
             return false;
         end;
 
-        LoaderWindow:WLWarning("Error","AN ERROR");
+        LoaderWindow:WLWarning("Error","AN ERROR: "..tostring(message.code));
 
         return false;
     end;
 
     local LoadKeySystem = function()
+        if _G.NoKeySystem then
+                return
+        end;
         local RateLimit = false;
 
         LoaderWindow:AddLabel("Key System","Success");
@@ -206,7 +209,7 @@ return function(MainLoader , SecondLoader , SupportedExternal)
 
         if not CheckKey(tostring(script_key)) then
             LoaderWindow:AddLabel("Invalid Key","Error");
-
+            
             LoadKeySystem();
         else
             LoaderWindow:AddLabel("Whitelist!","Success");
