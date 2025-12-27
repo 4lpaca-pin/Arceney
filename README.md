@@ -17,4 +17,4 @@ visit [WEAO](https://weao.gg/)
 ## 📱 Socials
 - **Website**: https://arceney.win
 - **Tiktok**: https://www.tiktok.com/@4lpacaLoL
-- **Discord**: https://arceney.cc/discord or https://discord.gg/wPaQZwhMHy
+- **Discord**: https://arceney.win/discord or https://discord.gg/wPaQZwhMHy
