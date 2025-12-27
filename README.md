@@ -1,4 +1,4 @@
-# Arceney.cc
+# Arceney.win
 
 ## 🛡️ Loader
 - Get the script below and paste it into your executor
@@ -15,6 +15,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/Arceney/re
 visit [WEAO](https://weao.gg/)
 
 ## 📱 Socials
-- **Website**: https://arceney.cc
+- **Website**: https://arceney.win
 - **Tiktok**: https://www.tiktok.com/@4lpacaLoL
 - **Discord**: https://arceney.cc/discord or https://discord.gg/wPaQZwhMHy
