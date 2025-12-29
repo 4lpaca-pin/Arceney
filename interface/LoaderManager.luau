@@ -150,7 +150,7 @@ return function(MainLoader , SecondLoader , SupportedExternal)
             {
                 Text = "Get Key",
                 Callback = function()
-                    (setclipboard or toclipboard)("https://arceney.cc/key")
+                    (setclipboard or toclipboard)("https://arceney.win/key")
                 end,
             },
             {
