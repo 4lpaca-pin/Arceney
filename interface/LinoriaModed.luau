@@ -203,13 +203,13 @@ table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
 
 	if RainbowStep >= Val1 then
 		RainbowStep = 0
-		
+
 		Hue = Hue + mval2;
-	
+
 		if Hue > 1 then
 			Hue = 0;
 		end;
-		
+
 		Library.CurrentRainbowHue = Hue;
 		Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
 	end
@@ -283,7 +283,7 @@ end;
 
 function Library:ApplyTextStroke(Inst)
 	Inst.TextStrokeTransparency = 1;
-	
+
 	Library:Create('UIStroke', {
 		Color = Color3.new(0, 0, 0);
 		Thickness = 1;
@@ -312,7 +312,7 @@ end;
 
 function Library:MakeDraggable(Instance, Cutoff)
 	Instance.Active = true;
-	
+
 	local smooth = TweenInfo.new(0.15);
 	Instance.InputBegan:Connect(function(Input)
 		if ((Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) or Input.UserInputType == Enum.UserInputType.Touch) then
@@ -321,11 +321,11 @@ function Library:MakeDraggable(Instance, Cutoff)
 				Mouse.X - Instance.AbsolutePosition.X,
 				(Mouse.Y - Instance.AbsolutePosition.Y)
 			);
-			
+
 			if ObjPos.Y > (Cutoff or 40) then
 				return;
 			end;
-			
+
 			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or (InputService.TouchEnabled and InputService:IsMouseButtonPressed(Enum.UserInputType.Touch)) do
 				local Target = UDim2.new(
 					0,
@@ -333,7 +333,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 					0,
 					(Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)) + FixedY
 				);
-				
+
 				TweenService:Create(Instance,smooth,{
 					Position = Target
 				}):Play();
@@ -386,7 +386,7 @@ function Library:AddToolTip(InfoStr, HoverInstance)
 		end
 
 		IsHovering = true
-		
+
 		local Fixed = math.abs(ScreenGui.AbsolutePosition.Y);
 
 		Tooltip.Position = UDim2.fromOffset(Mouse.X + 15, (Mouse.Y + 12) + Fixed)
@@ -1873,7 +1873,7 @@ do
 			TextStrokeTransparency = 0;
 			TextXAlignment = Enum.TextXAlignment.Left;
 			ClearTextOnFocus = Textbox.AutoClear;
-			
+
 			ZIndex = 7;
 			Parent = Container;
 		});
@@ -2712,12 +2712,22 @@ do
 				table.insert(Defaults, Idx)
 			end
 		elseif type(Info.Default) == 'table' then
-			for _, Value in next, Info.Default do
-				local Idx = table.find(Dropdown.Values, Value)
-				if Idx then
-					table.insert(Defaults, Idx)
+			if #Info.Default > 0 then -- n,v
+				for Name, Value in next, Info.Default do
+					local Idx = table.find(Dropdown.Values, Value);
+					if Idx then
+						table.insert(Defaults, Idx)
+					end
 				end
-			end
+			else
+				for Name, Value in next, Info.Default do
+					local Idx = (Value == true and table.find(Dropdown.Values,Name));
+			
+					if Idx then
+						table.insert(Defaults, Idx)
+					end
+				end
+			end;
 		elseif type(Info.Default) == 'number' and Dropdown.Values[Info.Default] ~= nil then
 			table.insert(Defaults, Info.Default)
 		end
@@ -3223,7 +3233,7 @@ function Library:CreateWindow(...)
 			Size = UDim2.new(0, TabButtonWidth + 8 + 4, 1, 0);
 			ZIndex = 1;
 			Parent = TabArea;
-			
+
 		});
 
 		Library:AddToRegistry(TabButton, {
@@ -3263,7 +3273,7 @@ function Library:CreateWindow(...)
 			Parent = TabContainer;
 			ClipsDescendants = true;
 		});
-		
+
 		local FixedSize = UDim2.new(0.5, -12 + 2, 1, -15);--UDim2.new(0.5, -12 + 2, 0, 507 + 2)
 
 		local LeftSide = Library:Create('ScrollingFrame', {
@@ -3291,7 +3301,7 @@ function Library:CreateWindow(...)
 			ZIndex = 2;
 			Parent = TabFrame;
 		});
-		
+
 		if Single then
 			LeftSide.Size = UDim2.new(1,-15,1,-15);
 			LeftSide.Position = UDim2.fromScale(0.5,0.5);
@@ -3680,54 +3690,6 @@ function Library:CreateWindow(...)
 		Toggled = (not Toggled);
 		ModalElement.Modal = Toggled;
 
-		if Toggled then
-			-- A bit scuffed, but if we're going from not toggled -> toggled we want to show the frame immediately so that the fade is visible.
-			Outer.Visible = true;
-
-			task.spawn(function()
-				if not Drawing then
-					return;
-				end;
-				
-				-- TODO: add cursor fade?
-				local State = InputService.MouseIconEnabled;
-
-				local Cursor = Drawing.new('Triangle');
-				Cursor.Thickness = 1;
-				Cursor.Filled = true;
-				Cursor.Visible = true;
-
-				local CursorOutline = Drawing.new('Triangle');
-				CursorOutline.Thickness = 1;
-				CursorOutline.Filled = false;
-				CursorOutline.Color = Color3.new(0, 0, 0);
-				CursorOutline.Visible = true;
-
-				while Toggled and ScreenGui.Parent do
-					InputService.MouseIconEnabled = false;
-
-					local mPos = InputService:GetMouseLocation();
-
-					Cursor.Color = Library.AccentColor;
-
-					Cursor.PointA = Vector2.new(mPos.X, mPos.Y);
-					Cursor.PointB = Vector2.new(mPos.X + 16, mPos.Y + 6);
-					Cursor.PointC = Vector2.new(mPos.X + 6, mPos.Y + 16);
-
-					CursorOutline.PointA = Cursor.PointA;
-					CursorOutline.PointB = Cursor.PointB;
-					CursorOutline.PointC = Cursor.PointC;
-
-					RenderStepped:Wait();
-				end;
-
-				InputService.MouseIconEnabled = State;
-
-				Cursor:Remove();
-				CursorOutline:Remove();
-			end);
-		end;
-
 		for _, Desc in next, Outer:GetDescendants() do
 			local Properties = {};
 
@@ -3804,15 +3766,15 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 	local i_isfolder = getgenv().isfolder;
 	local d_delfile = getgenv().delfile;
 	local m_makefolder = getgenv().makefolder;
-	
+
 	if not i_isfolder(Directory) then
 		m_makefolder(Directory);
 	end;
-	
+
 	if not i_isfolder(Directory..'/'..ConfigFolder) then
 		m_makefolder(Directory..'/'..ConfigFolder);
 	end;
-	
+
 	local MainDirectory = Directory..'/'..ConfigFolder;
 	local Cfgs = {
 		Parser = {
@@ -3883,10 +3845,10 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 			"#n1#ConfigList",
 		}
 	};
-	
+
 	function Cfgs:AddConfig(Name)
 		local file_path = MainDirectory..'/'..tostring(Name);
-		
+
 		local data = {
 			objects = {}
 		}
@@ -3905,35 +3867,35 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 		end	
 
 		local success, encoded = pcall(HttpService.JSONEncode, HttpService, data);
-		
+
 		if not success then
 			return false, 'failed to encode data'
 		end
 
 		w_writefile(file_path, encoded);
-		
+
 		return true
 	end;
-	
+
 	function Cfgs:GetConfigs()
 		local names = {};
 
 		for i,v in next , l_lisrfiles(MainDirectory) do
 			local Name = string.sub(v , #MainDirectory + 2);
-			
+
 			table.insert(names , Name);
 		end;
 
 		return names;
 	end;
-	
+
 	function Cfgs:LoadConfig(Name)
 		local file_path = MainDirectory..'/'..tostring(Name);
-		
+
 		if not i_isfile(file_path) then
 			return false , 'Config not found'
 		end;
-		
+
 		local success, decoded = pcall(HttpService.JSONDecode, HttpService, r_readfile(file_path))
 		if not success then return false, 'decode error' end
 
@@ -3945,23 +3907,23 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 
 		return true
 	end;
-	
+
 	function Cfgs:DeleteConfig(Name)
 		local file_path = MainDirectory..'/'..tostring(Name);
 
 		if not i_isfile(file_path) then
 			return true;
 		end;
-		
+
 		d_delfile(file_path);
-		
+
 		return true;
 	end;
-	
+
 	local BuiltInConfigs = Self:AddLeftGroupbox("Script Configs");
 	local CfgName = "";
 	local refresh;
-	
+
 	BuiltInConfigs:AddInput('#n1#ConfigName', {
 		Numeric = false,
 		Finished = false,
@@ -3972,19 +3934,19 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 			CfgName = Value;
 		end
 	});
-	
+
 	BuiltInConfigs:AddButton({
 		Text = 'Add Config',
 		Func = function()
 			if CfgName and CfgName:byte() then
 				local cfg,sg = Cfgs:AddConfig(CfgName);
-				
+
 				if cfg then
 					Library:Notify("Added config",3)
 				else
 					Library:Notify("Failed to create config",3)
 				end;
-				
+
 				if refresh then
 					refresh();
 				end;
@@ -3993,9 +3955,9 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 			end;
 		end,
 	})
-	
+
 	BuiltInConfigs:AddLabel('\n',true);
-	
+
 	local SelectedConfig;
 	local cfglist = BuiltInConfigs:AddDropdown('#n1#ConfigList', {
 		Values = Cfgs:GetConfigs(),
@@ -4006,38 +3968,38 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 			SelectedConfig = value or SelectedConfig;
 		end
 	});
-	
+
 	refresh = function()
 		local cfgs = Cfgs:GetConfigs();
-		
+
 		cfglist.Values = cfgs;
 		cfglist:SetValues(cfgs);
 	end;
-	
+
 	BuiltInConfigs:AddButton({
 		Text = 'Refresh Configs',
 		Func = refresh,
 	});
-	
+
 	BuiltInConfigs:AddButton({
 		Text = 'Save Config',
 		Func = function()
 			if SelectedConfig then
 				local success,msg = Cfgs:AddConfig(SelectedConfig)
-				
+
 				if success then
 					Library:Notify('Saved config "'..tostring(SelectedConfig)..'"',3)
 				else
 					Library:Notify(msg,3)
 				end;
-				
+
 				refresh();
 			else
 				Library:Notify("Failed to load config",3)
 			end;
 		end,
 	});
-	
+
 	BuiltInConfigs:AddButton({
 		Text = 'Load Config',
 		Func = function()
@@ -4056,27 +4018,27 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 			end;
 		end,
 	});
-	
+
 	BuiltInConfigs:AddButton({
 		Text = 'Delete Config',
 		DoubleClick = true,
 		Func = function()
 			if SelectedConfig then
 				local success,msg = Cfgs:DeleteConfig(SelectedConfig)
-				
+
 				if success then
 					Library:Notify('Deleted config "'..tostring(SelectedConfig)..'"',3)
 				else
 					Library:Notify(msg,3)
 				end;
-				
+
 				refresh();
 			else
 				Library:Notify("Failed to delete config",3)
 			end;
 		end,
 	});
-	
+
 	return Cfgs;
 end;
 
