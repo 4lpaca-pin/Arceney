@@ -5,6 +5,7 @@
 
 cloneref = cloneref or function(i) return i end;
 gethui = gethui or get_hidden_gui;
+setclipboard = setclipboard or toclipboard;
 getgenv = getgenv or function()
 	return _G;
 end;
@@ -3923,8 +3924,9 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 	local BuiltInConfigs = Self:AddLeftGroupbox("Script Configs");
 	local CfgName = "";
 	local refresh;
-
-	BuiltInConfigs:AddInput('#n1#ConfigName', {
+	local input;
+	
+	input = BuiltInConfigs:AddInput('#n1#ConfigName', {
 		Numeric = false,
 		Finished = false,
 		Text = "Config Name",
@@ -3942,11 +3944,15 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 				local cfg,sg = Cfgs:AddConfig(CfgName);
 
 				if cfg then
-					Library:Notify("Added config",3)
+					Library:Notify("Added config \""..tostring(CfgName)..'"',3)
 				else
 					Library:Notify("Failed to create config",3)
 				end;
-
+				
+				if CfgName:byte() then
+					input:SetValue("");
+				end;
+				
 				if refresh then
 					refresh();
 				end;
