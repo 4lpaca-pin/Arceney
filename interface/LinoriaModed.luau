@@ -316,7 +316,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 
 	local smooth = TweenInfo.new(0.15);
 	Instance.InputBegan:Connect(function(Input)
-		if ((Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) or Input.UserInputType == Enum.UserInputType.Touch) then
+		if ((Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch)) then
 			local FixedY = math.abs(ScreenGui.AbsolutePosition.Y);
 			local ObjPos = Vector2.new(
 				Mouse.X - Instance.AbsolutePosition.X,
@@ -429,6 +429,20 @@ function Library:OnHighlight(HighlightInstance, Instance, Properties, Properties
 			end;
 		end;
 	end)
+end;
+
+function Library:CreateInput(Element: Frame , Response: () -> any)
+	local Button = Instance.new("ImageButton",Element);
+
+	Button.ZIndex = Element.ZIndex + 1;
+	Button.Size = UDim2.fromScale(1,1);
+	Button.BackgroundTransparency = 1;
+	Button.ImageTransparency = 1;
+	Button.Image = "rbxasset://textures/translateIcon.png";
+	
+	return Button.MouseButton1Click:Connect(function()
+		return Response(Button);
+	end);
 end;
 
 function Library:MouseIsOverOpenedFrame()
@@ -895,7 +909,7 @@ do
 				if type(Callback) ~= 'function' then
 					Callback = function() end
 				end
-
+				
 				local Button = Library:CreateLabel({
 					Active = false;
 					Size = UDim2.new(1, 0, 0, 15);
@@ -910,15 +924,13 @@ do
 					{ TextColor3 = 'AccentColor' },
 					{ TextColor3 = 'FontColor' }
 				);
-
-				Button.InputBegan:Connect(function(Input)
-					if Input.UserInputType ~= Enum.UserInputType.MouseButton1 then
-						return
-					end
-
-					Callback()
+				
+				Library:CreateInput(Button , function()
+					if Callback then
+						Callback();
+					end;
 				end)
-			end
+			end;
 
 			ContextMenu:AddOption('Copy color', function()
 				Library.ColorClipboard = ColorPicker.Value
@@ -1087,7 +1099,7 @@ do
 				Library:AttemptSave();
 			end;
 		end);
-
+		
 		DisplayFrame.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
 				if PickerFrameOuter.Visible then
@@ -1658,11 +1670,18 @@ do
 
 				return true
 			end
-
-			Button.Outer.InputBegan:Connect(function(Input)
-				if not ValidateClick(Input) then return end
+			
+			local function IsValidInput()
+				if Library:MouseIsOverOpenedFrame() then
+					return false;
+				end;
+				
+				return true;
+			end
+			
+			Library:CreateInput(Button.Outer , function(InitBlox: ImageButton)
 				if Button.Locked then return end
-
+				
 				if Button.DoubleClick then
 					Library:RemoveFromRegistry(Button.Label)
 					Library:AddToRegistry(Button.Label, { TextColor3 = 'AccentColor' })
@@ -1671,7 +1690,7 @@ do
 					Button.Label.Text = 'Are you sure?'
 					Button.Locked = true
 
-					local clicked = WaitForEvent(Button.Outer.InputBegan, 0.5, ValidateClick)
+					local clicked = WaitForEvent(InitBlox.MouseButton1Click, 0.5, IsValidInput);
 
 					Library:RemoveFromRegistry(Button.Label)
 					Library:AddToRegistry(Button.Label, { TextColor3 = 'FontColor' })
@@ -1688,7 +1707,7 @@ do
 				end
 
 				Library:SafeCallback(Button.Func);
-			end)
+			end);
 		end
 
 		Button.Outer, Button.Inner, Button.Label = CreateBaseButton(Button)
@@ -2077,12 +2096,10 @@ do
 			Library:SafeCallback(Toggle.Changed, Toggle.Value);
 			Library:UpdateDependencyBoxes();
 		end;
-
-		ToggleRegion.InputBegan:Connect(function(Input)
-			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
-				Toggle:SetValue(not Toggle.Value) -- Why was it not like this from the start?
-				Library:AttemptSave();
-			end;
+		
+		Library:CreateInput(ToggleRegion , function()
+			Toggle:SetValue(not Toggle.Value) -- Why was it not like this from the start?
+			Library:AttemptSave();
 		end);
 
 		if Toggle.Risky then
@@ -2580,45 +2597,44 @@ do
 					ButtonLabel.TextColor3 = Selected and Library.AccentColor or Library.FontColor;
 					Library.RegistryMap[ButtonLabel].Properties.TextColor3 = Selected and 'AccentColor' or 'FontColor';
 				end;
+				
+				Library:CreateInput(ButtonLabel , function()
+					local Try = not Selected;
 
-				ButtonLabel.InputBegan:Connect(function(Input)
-					if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
-						local Try = not Selected;
+					if Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
 
-						if Dropdown:GetActiveValues() == 1 and (not Try) and (not Info.AllowNull) then
-						else
-							if Info.Multi then
-								Selected = Try;
+					else
+						if Info.Multi then
+							Selected = Try;
 
-								if Selected then
-									Dropdown.Value[Value] = true;
-								else
-									Dropdown.Value[Value] = nil;
-								end;
+							if Selected then
+								Dropdown.Value[Value] = true;
 							else
-								Selected = Try;
+								Dropdown.Value[Value] = nil;
+							end;
+						else
+							Selected = Try;
 
-								if Selected then
-									Dropdown.Value = Value;
-								else
-									Dropdown.Value = nil;
-								end;
-
-								for _, OtherButton in next, Buttons do
-									OtherButton:UpdateButton();
-								end;
+							if Selected then
+								Dropdown.Value = Value;
+							else
+								Dropdown.Value = nil;
 							end;
 
-							Table:UpdateButton();
-							Dropdown:Display();
-
-							Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
-							Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
-
-							Library:AttemptSave();
+							for _, OtherButton in next, Buttons do
+								OtherButton:UpdateButton();
+							end;
 						end;
+
+						Table:UpdateButton();
+						Dropdown:Display();
+
+						Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
+						Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
+
+						Library:AttemptSave();
 					end;
-				end);
+				end)
 
 				Table:UpdateButton();
 				Dropdown:Display();
@@ -2681,7 +2697,7 @@ do
 			Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
 			Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
 		end;
-
+		
 		DropdownOuter.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
 				if ListOuter.Visible then
@@ -3616,13 +3632,11 @@ function Library:CreateWindow(...)
 
 					BoxOuter.Size = UDim2.new(1, 0, 0, 20 + Size + 2 + 2);
 				end;
-
-				Button.InputBegan:Connect(function(Input)
-					if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
-						Tab:Show();
-						Tab:Resize();
-					end;
-				end);
+				
+				Library:CreateInput(Button , function()
+					Tab:Show();
+					Tab:Resize();
+				end)
 
 				Tab.Container = Container;
 				Tabbox.Tabs[Name] = Tab;
@@ -3652,12 +3666,10 @@ function Library:CreateWindow(...)
 		function Tab:AddRightTabbox(Name)
 			return Tab:AddTabbox({ Name = Name, Side = 2; });
 		end;
-
-		TabButton.InputBegan:Connect(function(Input)
-			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
-				Tab:ShowTab();
-			end;
-		end);
+		
+		Library:CreateInput(TabButton , function()
+			Tab:ShowTab();
+		end)
 
 		-- This was the first tab added, so we show it by default.
 		if #TabContainer:GetChildren() == 1 then
@@ -3740,7 +3752,44 @@ function Library:CreateWindow(...)
 		elseif Input.KeyCode == Enum.KeyCode.RightControl or (Input.KeyCode == Enum.KeyCode.RightShift and (not Processed)) then
 			task.spawn(Library.Toggle)
 		end
-	end))
+	end));
+	
+	if Library.IsMobile then
+		local LinoriaPointer = Instance.new("Frame")
+		local Background = Instance.new("ImageButton")
+		local UICorner = Instance.new("UICorner")
+		local ScalingIcon = Instance.new("TextLabel")
+
+		LinoriaPointer.Parent = ScreenGui;
+		LinoriaPointer.BackgroundTransparency = 1.000
+		LinoriaPointer.LayoutOrder = 1
+		LinoriaPointer.Position = UDim2.new(0, 15, 0, 60)
+		LinoriaPointer.Size = UDim2.new(0, 44, 0, 44)
+
+		Background.Parent = LinoriaPointer
+		Background.AnchorPoint = Vector2.new(0, 0.5)
+		Background.BackgroundColor3 = Color3.fromRGB(18, 18, 21)
+		Background.BackgroundTransparency = 0.500
+		Background.Position = UDim2.new(0, 0, 0.5, 0)
+		Background.Size = UDim2.new(0, 44, 0, 44)
+
+		UICorner.CornerRadius = UDim.new(1, 0)
+		UICorner.Parent = Background
+
+		ScalingIcon.Parent = Background
+		ScalingIcon.AnchorPoint = Vector2.new(0.5, 0.5)
+		ScalingIcon.BackgroundTransparency = 1.000
+		ScalingIcon.Position = UDim2.new(0.5, 0, 0.5, 0)
+		ScalingIcon.Size = UDim2.new(0, 24, 0, 24)
+		ScalingIcon.FontFace = Font.new('rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json',Enum.FontWeight.Regular,Enum.FontStyle.Normal);
+		ScalingIcon.Text = "circle-person"
+		ScalingIcon.TextColor3 = Color3.fromRGB(247, 247, 248)
+		ScalingIcon.TextSize = 24.000;
+		
+		Library:GiveSignal(Background.MouseButton1Click:Connect(function()
+			task.spawn(Library.Toggle);
+		end));
+	end;
 
 	if Config.AutoShow then task.spawn(Library.Toggle) end
 
