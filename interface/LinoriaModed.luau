@@ -178,7 +178,7 @@ local Library = {
 	FontColor = Color3.fromRGB(255, 255, 255);
 	MainColor = Color3.fromRGB(28, 28, 28);
 	BackgroundColor = Color3.fromRGB(20, 20, 20);
-	AccentColor = Color3.fromRGB(114, 209, 201);
+	AccentColor = Color3.fromRGB(0, 214, 238);
 	OutlineColor = Color3.fromRGB(50, 50, 50);
 	RiskColor = Color3.fromRGB(255, 187, 51),
 
@@ -190,6 +190,8 @@ local Library = {
 
 	Signals = {};
 	ScreenGui = ScreenGui;
+	
+	IsMobileTouch = false;
 };
 
 Library.IsMobile = InputService.TouchEnabled;
@@ -198,6 +200,16 @@ local RainbowStep = 0
 local Hue = 0
 local Val1 = (1 / 60);
 local mval2 = (1 / 400);
+
+if Library.IsMobile then
+	InputService.TouchStarted:Connect(function(touch, gameProcessed)
+		Library.IsMobileTouch = true;
+	end)
+
+	InputService.TouchEnded:Connect(function(touch)
+		Library.IsMobileTouch = false;
+	end)
+end;
 
 table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
 	RainbowStep = RainbowStep + Delta
@@ -268,6 +280,18 @@ function Library:AttemptSave()
 	end;
 end;
 
+function Library:MakeCorner(Frame: Frame)
+	local lib = Instance.new('UICorner');
+
+	lib.Name = RandName();
+
+	lib.CornerRadius = UDim.new(0,8);
+
+	lib.Parent = Frame;
+
+	return lib;
+end;
+
 function Library:Create(Class, Properties)
 	local _Instance = Class;
 
@@ -311,6 +335,10 @@ function Library:CreateLabel(Properties, IsHud)
 	return Library:Create(_Instance, Properties);
 end;
 
+function Library:IsMobileHold()
+	return Library.IsMobileTouch;
+end
+
 function Library:MakeDraggable(Instance, Cutoff)
 	Instance.Active = true;
 
@@ -327,7 +355,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 				return;
 			end;
 
-			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or (InputService.TouchEnabled and InputService:IsMouseButtonPressed(Enum.UserInputType.Touch)) do
+			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or (InputService.TouchEnabled and Library:IsMobileHold()) do
 				local Target = UDim2.new(
 					0,
 					Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
@@ -439,7 +467,7 @@ function Library:CreateInput(Element: Frame , Response: () -> any)
 	Button.BackgroundTransparency = 1;
 	Button.ImageTransparency = 1;
 	Button.Image = "rbxasset://textures/translateIcon.png";
-	
+
 	return Button.MouseButton1Click:Connect(function()
 		return Response(Button);
 	end);
@@ -909,7 +937,7 @@ do
 				if type(Callback) ~= 'function' then
 					Callback = function() end
 				end
-				
+
 				local Button = Library:CreateLabel({
 					Active = false;
 					Size = UDim2.new(1, 0, 0, 15);
@@ -924,7 +952,7 @@ do
 					{ TextColor3 = 'AccentColor' },
 					{ TextColor3 = 'FontColor' }
 				);
-				
+
 				Library:CreateInput(Button , function()
 					if Callback then
 						Callback();
@@ -1063,7 +1091,7 @@ do
 
 		SatVibMap.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
-				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService:IsMouseButtonPressed(Enum.UserInputType.Touch) do
+				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Library:IsMobileHold() do
 					local MinX = SatVibMap.AbsolutePosition.X;
 					local MaxX = MinX + SatVibMap.AbsoluteSize.X;
 					local MouseX = math.clamp(Mouse.X, MinX, MaxX);
@@ -1085,7 +1113,7 @@ do
 
 		HueSelectorInner.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
-				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService:IsMouseButtonPressed(Enum.UserInputType.Touch) do
+				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Library:IsMobileHold() do
 					local MinY = HueSelectorInner.AbsolutePosition.Y;
 					local MaxY = MinY + HueSelectorInner.AbsoluteSize.Y;
 					local MouseY = math.clamp(Mouse.Y, MinY, MaxY);
@@ -1099,7 +1127,7 @@ do
 				Library:AttemptSave();
 			end;
 		end);
-		
+
 		DisplayFrame.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
 				if PickerFrameOuter.Visible then
@@ -1117,7 +1145,7 @@ do
 		if TransparencyBoxInner then
 			TransparencyBoxInner.InputBegan:Connect(function(Input)
 				if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) then
-					while (InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService:IsMouseButtonPressed(Enum.UserInputType.Touch)) do
+					while (InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Library:IsMobileHold()) do
 						local MinX = TransparencyBoxInner.AbsolutePosition.X;
 						local MaxX = MinX + TransparencyBoxInner.AbsoluteSize.X;
 						local MouseX = math.clamp(Mouse.X, MinX, MaxX);
@@ -1349,7 +1377,7 @@ do
 				local Key = KeyPicker.Value;
 
 				if Key == 'MB1' or Key == 'MB2' then
-					return Key == 'MB1' and (InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService:IsMouseButtonPressed(Enum.UserInputType.Touch))
+					return Key == 'MB1' and (InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Library:IsMobileHold())
 						or Key == 'MB2' and InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2);
 				else
 					return InputService:IsKeyDown(Enum.KeyCode[KeyPicker.Value]);
@@ -1670,18 +1698,18 @@ do
 
 				return true
 			end
-			
+
 			local function IsValidInput()
 				if Library:MouseIsOverOpenedFrame() then
 					return false;
 				end;
-				
+
 				return true;
 			end
-			
+
 			Library:CreateInput(Button.Outer , function(InitBlox: ImageButton)
 				if Button.Locked then return end
-				
+
 				if Button.DoubleClick then
 					Library:RemoveFromRegistry(Button.Label)
 					Library:AddToRegistry(Button.Label, { TextColor3 = 'AccentColor' })
@@ -2096,7 +2124,7 @@ do
 			Library:SafeCallback(Toggle.Changed, Toggle.Value);
 			Library:UpdateDependencyBoxes();
 		end;
-		
+
 		Library:CreateInput(ToggleRegion , function()
 			Toggle:SetValue(not Toggle.Value) -- Why was it not like this from the start?
 			Library:AttemptSave();
@@ -2288,7 +2316,7 @@ do
 				local gPos = Fill.Size.X.Offset;
 				local Diff = mPos - (Fill.AbsolutePosition.X + gPos);
 
-				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or InputService:IsMouseButtonPressed(Enum.UserInputType.Touch) do
+				while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) or Library:IsMobileHold() do
 					local nMPos = Mouse.X;
 					local nX = math.clamp(gPos + (nMPos - mPos) + Diff, 0, Slider.MaxSize);
 
@@ -2597,7 +2625,7 @@ do
 					ButtonLabel.TextColor3 = Selected and Library.AccentColor or Library.FontColor;
 					Library.RegistryMap[ButtonLabel].Properties.TextColor3 = Selected and 'AccentColor' or 'FontColor';
 				end;
-				
+
 				Library:CreateInput(ButtonLabel , function()
 					local Try = not Selected;
 
@@ -2697,7 +2725,7 @@ do
 			Library:SafeCallback(Dropdown.Callback, Dropdown.Value);
 			Library:SafeCallback(Dropdown.Changed, Dropdown.Value);
 		end;
-		
+
 		DropdownOuter.InputBegan:Connect(function(Input)
 			if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Library:MouseIsOverOpenedFrame() then
 				if ListOuter.Visible then
@@ -2739,7 +2767,7 @@ do
 			else
 				for Name, Value in next, Info.Default do
 					local Idx = (Value == true and table.find(Dropdown.Values,Name));
-			
+
 					if Idx then
 						table.insert(Defaults, Idx)
 					end
@@ -3147,7 +3175,9 @@ function Library:CreateWindow(...)
 		ZIndex = 1;
 		Parent = ScreenGui;
 	});
-
+	
+	Library:MakeCorner(Outer);
+	
 	Library:MakeDraggable(Outer, 25);
 
 	local Inner = Library:Create('Frame', {
@@ -3182,6 +3212,8 @@ function Library:CreateWindow(...)
 		ZIndex = 1;
 		Parent = Inner;
 	});
+	
+	Library:MakeCorner(Inner);
 
 	Library:AddToRegistry(MainSectionOuter, {
 		BackgroundColor3 = 'BackgroundColor';
@@ -3632,7 +3664,7 @@ function Library:CreateWindow(...)
 
 					BoxOuter.Size = UDim2.new(1, 0, 0, 20 + Size + 2 + 2);
 				end;
-				
+
 				Library:CreateInput(Button , function()
 					Tab:Show();
 					Tab:Resize();
@@ -3666,7 +3698,7 @@ function Library:CreateWindow(...)
 		function Tab:AddRightTabbox(Name)
 			return Tab:AddTabbox({ Name = Name, Side = 2; });
 		end;
-		
+
 		Library:CreateInput(TabButton , function()
 			Tab:ShowTab();
 		end)
@@ -3753,7 +3785,7 @@ function Library:CreateWindow(...)
 			task.spawn(Library.Toggle)
 		end
 	end));
-	
+
 	if Library.IsMobile then
 		local LinoriaPointer = Instance.new("Frame")
 		local Background = Instance.new("ImageButton")
@@ -3785,7 +3817,7 @@ function Library:CreateWindow(...)
 		ScalingIcon.Text = "circle-person"
 		ScalingIcon.TextColor3 = Color3.fromRGB(247, 247, 248)
 		ScalingIcon.TextSize = 24.000;
-		
+
 		Library:GiveSignal(Background.MouseButton1Click:Connect(function()
 			task.spawn(Library.Toggle);
 		end));
@@ -3970,11 +4002,11 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 		return true;
 	end;
 
-	local BuiltInConfigs = Self:AddLeftGroupbox("Script Configs");
+	local BuiltInConfigs = Self:AddLeftGroupbox("Configuration");
 	local CfgName = "";
 	local refresh;
 	local input;
-	
+
 	input = BuiltInConfigs:AddInput('#n1#ConfigName', {
 		Numeric = false,
 		Finished = false,
@@ -3997,11 +4029,11 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 				else
 					Library:Notify("Failed to create config",3)
 				end;
-				
+
 				if CfgName:byte() then
 					input:SetValue("");
 				end;
-				
+
 				if refresh then
 					refresh();
 				end;
@@ -4011,7 +4043,7 @@ function Library:SetConfigs(Self,Directory: string , ConfigFolder: string)
 		end,
 	})
 
-	BuiltInConfigs:AddLabel('\n',true);
+	BuiltInConfigs:AddDivider();
 
 	local SelectedConfig;
 	local cfglist = BuiltInConfigs:AddDropdown('#n1#ConfigList', {
