@@ -24,6 +24,10 @@ getscripthash = getscripthash or get_script_hash;
 getcustomasset = getcustomasset or getsynasset;
 getgenv = getgenv or getfenv;
 
+if drawing then
+        drawing.clear = drawing.clear or cleardawcache or clear_draw_cache;
+end;
+
 return function(MainLoader , SecondLoader , SupportedExternal)
     local LoaderWindow = Loader.new("ARCENEY.WIN","LOADER");
     local LicenseKeyCache = "Arceney.license";
