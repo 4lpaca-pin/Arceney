@@ -27,10 +27,7 @@ end;
 
 local fetch = function(url: string)
 	local x,p = pcall(function()
-		return (request or http_request or (http and http.request) or (syn and syn.request))({
-			Url = url,
-			Method = "GET", -- remove user-agent cuz to solara suck
-		}).Body;
+		return game:HttpGet(url);
 	end);
 	
 	if x then
