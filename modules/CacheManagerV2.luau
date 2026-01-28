@@ -16,7 +16,7 @@ local GetHash = function(str: string)
 end;
 
 local lib = {
-	directory = "Arceney-Cache",
+	directory = "Arceney-Cache-v2",
 };
 
 function lib.init()
