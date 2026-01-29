@@ -8,7 +8,7 @@ return {
             ["Task"] = {
                 ["Sea Soldier"] = 8
             },
-            ["Name"] = [=[Sea Soldier]=],
+            ["Name"] = "Sea Soldier",
             ["LevelReq"] = 1425
         },
         [2] = {
@@ -19,7 +19,7 @@ return {
             ["Task"] = {
                 ["Water Fighter"] = 8
             },
-            ["Name"] = [=[Water Fighter]=],
+            ["Name"] = "Water Fighter",
             ["LevelReq"] = 1450
         },
         [3] = {
@@ -30,7 +30,7 @@ return {
             ["Task"] = {
                 ["Tide Keeper"] = 1
             },
-            ["Name"] = [=[Tide Keeper]=],
+            ["Name"] = "Tide Keeper",
             ["LevelReq"] = 1475
         }
     },
@@ -43,7 +43,7 @@ return {
             ["Task"] = {
                 ["Demonic Soul"] = 8
             },
-            ["Name"] = [=[Demonic Soul]=],
+            ["Name"] = "Demonic Soul",
             ["LevelReq"] = 2025
         },
         [2] = {
@@ -54,7 +54,7 @@ return {
             ["Task"] = {
                 ["Posessed Mummy"] = 8
             },
-            ["Name"] = [=[Posessed Mummy]=],
+            ["Name"] = "Posessed Mummy",
             ["LevelReq"] = 2050
         }
     },
@@ -67,7 +67,7 @@ return {
             ["Task"] = {
                 ["Sky Bandit"] = 7
             },
-            ["Name"] = [=[Sky Bandit]=],
+            ["Name"] = "Sky Bandit",
             ["LevelReq"] = 150
         },
         [2] = {
@@ -78,7 +78,7 @@ return {
             ["Task"] = {
                 ["Dark Master"] = 8
             },
-            ["Name"] = [=[Dark Master]=],
+            ["Name"] = "Dark Master",
             ["LevelReq"] = 175
         }
     },
@@ -91,7 +91,7 @@ return {
             ["Task"] = {
                 ["Warden"] = 1
             },
-            ["Name"] = [=[Warden]=],
+            ["Name"] = "Warden",
             ["LevelReq"] = 220
         },
         [2] = {
@@ -102,7 +102,7 @@ return {
             ["Task"] = {
                 ["Chief Warden"] = 1
             },
-            ["Name"] = [=[Chief Warden]=],
+            ["Name"] = "Chief Warden",
             ["LevelReq"] = 230
         },
         [3] = {
@@ -113,7 +113,7 @@ return {
             ["Task"] = {
                 ["Swan"] = 1
             },
-            ["Name"] = [=[Swan]=],
+            ["Name"] = "Swan",
             ["LevelReq"] = 240
         }
     },
@@ -126,7 +126,7 @@ return {
             ["Task"] = {
                 ["Sun-kissed Warrior"] = 8
             },
-            ["Name"] = [=[Sun-kissed Warrior]=],
+            ["Name"] = "Sun-kissed Warrior",
             ["LevelReq"] = 2500
         },
         [2] = {
@@ -137,7 +137,7 @@ return {
             ["Task"] = {
                 ["Isle Champion"] = 8
             },
-            ["Name"] = [=[Isle Champion]=],
+            ["Name"] = "Isle Champion",
             ["LevelReq"] = 2525
         }
     },
@@ -150,7 +150,7 @@ return {
             ["Task"] = {
                 ["Fishman Warrior"] = 8
             },
-            ["Name"] = [=[Fishman Warrior]=],
+            ["Name"] = "Fishman Warrior",
             ["LevelReq"] = 375
         },
         [2] = {
@@ -161,7 +161,7 @@ return {
             ["Task"] = {
                 ["Fishman Commando"] = 7
             },
-            ["Name"] = [=[Fishman Commando]=],
+            ["Name"] = "Fishman Commando",
             ["LevelReq"] = 400
         },
         [3] = {
@@ -172,7 +172,7 @@ return {
             ["Task"] = {
                 ["Fishman Lord"] = 1
             },
-            ["Name"] = [=[Fishman Lord]=],
+            ["Name"] = "Fishman Lord",
             ["LevelReq"] = 425
         }
     },
@@ -185,7 +185,7 @@ return {
             ["Task"] = {
                 ["Fishman Raider"] = 8
             },
-            ["Name"] = [=[Fishman Raider]=],
+            ["Name"] = "Fishman Raider",
             ["LevelReq"] = 1775
         },
         [2] = {
@@ -196,7 +196,7 @@ return {
             ["Task"] = {
                 ["Fishman Captain"] = 8
             },
-            ["Name"] = [=[Fishman Captain]=],
+            ["Name"] = "Fishman Captain",
             ["LevelReq"] = 1800
         }
     },
@@ -209,7 +209,7 @@ return {
             ["Task"] = {
                 ["Candy Pirate"] = 8
             },
-            ["Name"] = [=[Candy Pirate]=],
+            ["Name"] = "Candy Pirate",
             ["LevelReq"] = 2400
         },
         [2] = {
@@ -220,7 +220,7 @@ return {
             ["Task"] = {
                 ["Snow Demon"] = 8
             },
-            ["Name"] = [=[Snow Demon]=],
+            ["Name"] = "Snow Demon",
             ["LevelReq"] = 2425
         }
     },
@@ -233,7 +233,7 @@ return {
             ["Task"] = {
                 ["Magma Ninja"] = 8
             },
-            ["Name"] = [=[Magma Ninja]=],
+            ["Name"] = "Magma Ninja",
             ["LevelReq"] = 1175
         },
         [2] = {
@@ -244,15 +244,15 @@ return {
             ["Task"] = {
                 ["Lava Pirate"] = 8
             },
-            ["Name"] = [=[Lava Pirate]=],
+            ["Name"] = "Lava Pirate",
             ["LevelReq"] = 1200
         }
     },
     ["CitizenQuest"] = {
         [1] = {
-            ["MeetsRequirements"] = function()end --[[function: 0x04e22f88a9c40c55]],
-            ["Name"] = [=[Town Raid]=],
-            ["OnComplete"] = function()end --[[function: 0xdf6b26439bff8535]],
+            ["MeetsRequirements"] = function() --[[function: 0x27a53bdb48f61af1]] end,
+            ["Name"] = "Town Raid",
+            ["OnComplete"] = function() --[[function: 0x06158785b3ecbbb1]] end,
             ["Reward"] = {
                 ["Exp"] = 250000000,
                 ["Beli"] = 100000
@@ -272,7 +272,7 @@ return {
             ["Task"] = {
                 ["Monkey"] = 6
             },
-            ["Name"] = [=[Monkeys]=],
+            ["Name"] = "Monkeys",
             ["LevelReq"] = 10
         },
         [2] = {
@@ -283,7 +283,7 @@ return {
             ["Task"] = {
                 ["Gorilla"] = 8
             },
-            ["Name"] = [=[Gorillas]=],
+            ["Name"] = "Gorillas",
             ["LevelReq"] = 15
         },
         [3] = {
@@ -294,7 +294,7 @@ return {
             ["Task"] = {
                 ["The Gorilla King"] = 1
             },
-            ["Name"] = [=[Gorilla King]=],
+            ["Name"] = "Gorilla King",
             ["LevelReq"] = 20
         }
     },
@@ -307,7 +307,7 @@ return {
             ["Task"] = {
                 ["Galley Pirate"] = 8
             },
-            ["Name"] = [=[Galley Pirate]=],
+            ["Name"] = "Galley Pirate",
             ["LevelReq"] = 625
         },
         [2] = {
@@ -318,7 +318,7 @@ return {
             ["Task"] = {
                 ["Galley Captain"] = 9
             },
-            ["Name"] = [=[Galley Captain]=],
+            ["Name"] = "Galley Captain",
             ["LevelReq"] = 650
         },
         [3] = {
@@ -329,7 +329,7 @@ return {
             ["Task"] = {
                 ["Cyborg"] = 1
             },
-            ["Name"] = [=[Cyborg]=],
+            ["Name"] = "Cyborg",
             ["LevelReq"] = 675
         }
     },
@@ -342,7 +342,7 @@ return {
             ["Task"] = {
                 ["Desert Bandit"] = 8
             },
-            ["Name"] = [=[Desert Bandit]=],
+            ["Name"] = "Desert Bandit",
             ["LevelReq"] = 60
         },
         [2] = {
@@ -353,7 +353,7 @@ return {
             ["Task"] = {
                 ["Desert Officer"] = 6
             },
-            ["Name"] = [=[Desert Officer]=],
+            ["Name"] = "Desert Officer",
             ["LevelReq"] = 75
         }
     },
@@ -366,7 +366,7 @@ return {
             ["Task"] = {
                 ["Snow Bandit"] = 7
             },
-            ["Name"] = [=[Snow Bandit]=],
+            ["Name"] = "Snow Bandit",
             ["LevelReq"] = 90
         },
         [2] = {
@@ -377,7 +377,7 @@ return {
             ["Task"] = {
                 ["Snowman"] = 8
             },
-            ["Name"] = [=[Snowman]=],
+            ["Name"] = "Snowman",
             ["LevelReq"] = 100
         },
         [3] = {
@@ -388,7 +388,7 @@ return {
             ["Task"] = {
                 ["Yeti"] = 1
             },
-            ["Name"] = [=[Yeti]=],
+            ["Name"] = "Yeti",
             ["LevelReq"] = 105
         }
     },
@@ -401,7 +401,7 @@ return {
             ["Task"] = {
                 ["Raider"] = 8
             },
-            ["Name"] = [=[Raider]=],
+            ["Name"] = "Raider",
             ["LevelReq"] = 700
         },
         [2] = {
@@ -412,7 +412,7 @@ return {
             ["Task"] = {
                 ["Mercenary"] = 8
             },
-            ["Name"] = [=[Mercenary]=],
+            ["Name"] = "Mercenary",
             ["LevelReq"] = 725
         },
         [3] = {
@@ -423,7 +423,7 @@ return {
             ["Task"] = {
                 ["Diamond"] = 1
             },
-            ["Name"] = [=[Diamond]=],
+            ["Name"] = "Diamond",
             ["LevelReq"] = 750
         }
     },
@@ -436,7 +436,7 @@ return {
             ["Task"] = {
                 ["Arctic Warrior"] = 8
             },
-            ["Name"] = [=[Arctic Warrior]=],
+            ["Name"] = "Arctic Warrior",
             ["LevelReq"] = 1350
         },
         [2] = {
@@ -447,7 +447,7 @@ return {
             ["Task"] = {
                 ["Snow Lurker"] = 8
             },
-            ["Name"] = [=[Snow Lurker]=],
+            ["Name"] = "Snow Lurker",
             ["LevelReq"] = 1375
         },
         [3] = {
@@ -458,7 +458,7 @@ return {
             ["Task"] = {
                 ["Awakened Ice Admiral"] = 1
             },
-            ["Name"] = [=[Ice Admiral]=],
+            ["Name"] = "Ice Admiral",
             ["LevelReq"] = 1400
         }
     },
@@ -471,7 +471,7 @@ return {
             ["Task"] = {
                 ["Marine Commodore"] = 8
             },
-            ["Name"] = [=[Marine Commodore]=],
+            ["Name"] = "Marine Commodore",
             ["LevelReq"] = 1700
         },
         [2] = {
@@ -482,7 +482,7 @@ return {
             ["Task"] = {
                 ["Marine Rear Admiral"] = 8
             },
-            ["Name"] = [=[Marine Rear Admiral]=],
+            ["Name"] = "Marine Rear Admiral",
             ["LevelReq"] = 1725
         },
         [3] = {
@@ -493,7 +493,7 @@ return {
             ["Task"] = {
                 ["Kilo Admiral"] = 1
             },
-            ["Name"] = [=[Kilo Admiral]=],
+            ["Name"] = "Kilo Admiral",
             ["LevelReq"] = 1750
         }
     },
@@ -506,7 +506,7 @@ return {
             ["Task"] = {
                 ["Sea Chanter"] = 8
             },
-            ["Name"] = [=[Sea Chanter]=],
+            ["Name"] = "Sea Chanter",
             ["LevelReq"] = 2650
         },
         [2] = {
@@ -517,7 +517,7 @@ return {
             ["Task"] = {
                 ["Ocean Prophet"] = 8
             },
-            ["Name"] = [=[Ocean Prophet]=],
+            ["Name"] = "Ocean Prophet",
             ["LevelReq"] = 2675
         }
     },
@@ -530,7 +530,7 @@ return {
             ["Task"] = {
                 ["Reborn Skeleton"] = 8
             },
-            ["Name"] = [=[Reborn Skeleton]=],
+            ["Name"] = "Reborn Skeleton",
             ["LevelReq"] = 1975
         },
         [2] = {
@@ -541,7 +541,7 @@ return {
             ["Task"] = {
                 ["Living Zombie"] = 8
             },
-            ["Name"] = [=[Living Zombie]=],
+            ["Name"] = "Living Zombie",
             ["LevelReq"] = 2000
         }
     },
@@ -554,7 +554,7 @@ return {
             ["Task"] = {
                 ["Forest Pirate"] = 8
             },
-            ["Name"] = [=[Forest Pirate]=],
+            ["Name"] = "Forest Pirate",
             ["LevelReq"] = 1825
         },
         [2] = {
@@ -565,7 +565,7 @@ return {
             ["Task"] = {
                 ["Mythological Pirate"] = 8
             },
-            ["Name"] = [=[Mythological Pirate]=],
+            ["Name"] = "Mythological Pirate",
             ["LevelReq"] = 1850
         },
         [3] = {
@@ -576,7 +576,7 @@ return {
             ["Task"] = {
                 ["Captain Elephant"] = 1
             },
-            ["Name"] = [=[Captain Elephant]=],
+            ["Name"] = "Captain Elephant",
             ["LevelReq"] = 1875
         }
     },
@@ -589,7 +589,7 @@ return {
             ["Task"] = {
                 ["Reef Bandit"] = 8
             },
-            ["Name"] = [=[Reef Bandit]=],
+            ["Name"] = "Reef Bandit",
             ["LevelReq"] = 2600
         },
         [2] = {
@@ -600,7 +600,7 @@ return {
             ["Task"] = {
                 ["Coral Pirate"] = 8
             },
-            ["Name"] = [=[Coral Pirate]=],
+            ["Name"] = "Coral Pirate",
             ["LevelReq"] = 2625
         }
     },
@@ -613,7 +613,7 @@ return {
             ["Task"] = {
                 ["Swan Pirate"] = 8
             },
-            ["Name"] = [=[Swan Pirate]=],
+            ["Name"] = "Swan Pirate",
             ["LevelReq"] = 775
         },
         [2] = {
@@ -624,7 +624,7 @@ return {
             ["Task"] = {
                 ["Factory Staff"] = 8
             },
-            ["Name"] = [=[Factory Staff]=],
+            ["Name"] = "Factory Staff",
             ["LevelReq"] = 800
         },
         [3] = {
@@ -635,7 +635,7 @@ return {
             ["Task"] = {
                 ["Jeremy"] = 1
             },
-            ["Name"] = [=[Jeremy]=],
+            ["Name"] = "Jeremy",
             ["LevelReq"] = 850
         }
     },
@@ -648,7 +648,7 @@ return {
             ["Task"] = {
                 ["Serpent Hunter"] = 8
             },
-            ["Name"] = [=[Serpent Hunter]=],
+            ["Name"] = "Serpent Hunter",
             ["LevelReq"] = 2550
         },
         [2] = {
@@ -659,7 +659,7 @@ return {
             ["Task"] = {
                 ["Skull Slayer"] = 8
             },
-            ["Name"] = [=[Skull Slayer]=],
+            ["Name"] = "Skull Slayer",
             ["LevelReq"] = 2575
         }
     },
@@ -672,7 +672,7 @@ return {
             ["Task"] = {
                 ["Zombie"] = 8
             },
-            ["Name"] = [=[Zombie]=],
+            ["Name"] = "Zombie",
             ["LevelReq"] = 950
         },
         [2] = {
@@ -683,7 +683,7 @@ return {
             ["Task"] = {
                 ["Vampire"] = 8
             },
-            ["Name"] = [=[Vampire]=],
+            ["Name"] = "Vampire",
             ["LevelReq"] = 975
         }
     },
@@ -696,7 +696,7 @@ return {
             ["Task"] = {
                 ["Isle Outlaw"] = 8
             },
-            ["Name"] = [=[Isle Outlaw]=],
+            ["Name"] = "Isle Outlaw",
             ["LevelReq"] = 2450
         },
         [2] = {
@@ -707,7 +707,7 @@ return {
             ["Task"] = {
                 ["Island Boy"] = 8
             },
-            ["Name"] = [=[Island Boy]=],
+            ["Name"] = "Island Boy",
             ["LevelReq"] = 2475
         }
     },
@@ -720,7 +720,7 @@ return {
             ["Task"] = {
                 ["Sweet Thief"] = 8
             },
-            ["Name"] = [=[Sweet Thief]=],
+            ["Name"] = "Sweet Thief",
             ["LevelReq"] = 2350
         },
         [2] = {
@@ -731,7 +731,7 @@ return {
             ["Task"] = {
                 ["Candy Rebel"] = 8
             },
-            ["Name"] = [=[Candy Rebel]=],
+            ["Name"] = "Candy Rebel",
             ["LevelReq"] = 2375
         }
     },
@@ -744,7 +744,7 @@ return {
             ["Task"] = {
                 ["Cocoa Warrior"] = 8
             },
-            ["Name"] = [=[Cocoa Warrior]=],
+            ["Name"] = "Cocoa Warrior",
             ["LevelReq"] = 2300
         },
         [2] = {
@@ -755,7 +755,7 @@ return {
             ["Task"] = {
                 ["Chocolate Bar Battler"] = 8
             },
-            ["Name"] = [=[Chocolate Bar Battler]=],
+            ["Name"] = "Chocolate Bar Battler",
             ["LevelReq"] = 2325
         }
     },
@@ -768,7 +768,7 @@ return {
             ["Task"] = {
                 ["Jungle Pirate"] = 8
             },
-            ["Name"] = [=[Jungle Pirate]=],
+            ["Name"] = "Jungle Pirate",
             ["LevelReq"] = 1900
         },
         [2] = {
@@ -779,7 +779,7 @@ return {
             ["Task"] = {
                 ["Musketeer Pirate"] = 8
             },
-            ["Name"] = [=[Musketeer Pirate]=],
+            ["Name"] = "Musketeer Pirate",
             ["LevelReq"] = 1925
         },
         [3] = {
@@ -790,7 +790,7 @@ return {
             ["Task"] = {
                 ["Beautiful Pirate"] = 1
             },
-            ["Name"] = [=[Beautiful Pirate]=],
+            ["Name"] = "Beautiful Pirate",
             ["LevelReq"] = 1950
         }
     },
@@ -803,7 +803,7 @@ return {
             ["Task"] = {
                 ["Baking Staff"] = 8
             },
-            ["Name"] = [=[Baking Staff]=],
+            ["Name"] = "Baking Staff",
             ["LevelReq"] = 2250
         },
         [2] = {
@@ -814,7 +814,7 @@ return {
             ["Task"] = {
                 ["Head Baker"] = 8
             },
-            ["Name"] = [=[Head Baker]=],
+            ["Name"] = "Head Baker",
             ["LevelReq"] = 2275
         }
     },
@@ -827,7 +827,7 @@ return {
             ["Task"] = {
                 ["Cookie Crafter"] = 8
             },
-            ["Name"] = [=[Cookie Crafter]=],
+            ["Name"] = "Cookie Crafter",
             ["LevelReq"] = 2200
         },
         [2] = {
@@ -838,7 +838,7 @@ return {
             ["Task"] = {
                 ["Cake Guard"] = 8
             },
-            ["Name"] = [=[Cake Guard]=],
+            ["Name"] = "Cake Guard",
             ["LevelReq"] = 2225
         }
     },
@@ -851,7 +851,7 @@ return {
             ["Task"] = {
                 ["Prisoner"] = 8
             },
-            ["Name"] = [=[Prisoner]=],
+            ["Name"] = "Prisoner",
             ["LevelReq"] = 190
         },
         [2] = {
@@ -862,7 +862,7 @@ return {
             ["Task"] = {
                 ["Dangerous Prisoner"] = 8
             },
-            ["Name"] = [=[Dangerous Prisoner]=],
+            ["Name"] = "Dangerous Prisoner",
             ["LevelReq"] = 210
         }
     },
@@ -875,7 +875,7 @@ return {
             ["Task"] = {
                 ["Marine Lieutenant"] = 8
             },
-            ["Name"] = [=[Marine Lieutenant]=],
+            ["Name"] = "Marine Lieutenant",
             ["LevelReq"] = 875
         },
         [2] = {
@@ -886,7 +886,7 @@ return {
             ["Task"] = {
                 ["Marine Captain"] = 9
             },
-            ["Name"] = [=[Marine Captain]=],
+            ["Name"] = "Marine Captain",
             ["LevelReq"] = 900
         },
         [3] = {
@@ -897,7 +897,7 @@ return {
             ["Task"] = {
                 ["Orbitus"] = 1
             },
-            ["Name"] = [=[Orbitus]=],
+            ["Name"] = "Orbitus",
             ["LevelReq"] = 925
         }
     },
@@ -910,7 +910,7 @@ return {
             ["Task"] = {
                 ["Bandit"] = 5
             },
-            ["Name"] = [=[Bandits]=],
+            ["Name"] = "Bandits",
             ["LevelReq"] = 0
         }
     },
@@ -923,7 +923,7 @@ return {
             ["Task"] = {
                 ["Ice Cream Chef"] = 8
             },
-            ["Name"] = [=[Ice Cream Chef]=],
+            ["Name"] = "Ice Cream Chef",
             ["LevelReq"] = 2125
         },
         [2] = {
@@ -934,7 +934,7 @@ return {
             ["Task"] = {
                 ["Ice Cream Commander"] = 8
             },
-            ["Name"] = [=[Ice Cream Commander]=],
+            ["Name"] = "Ice Cream Commander",
             ["LevelReq"] = 2150
         },
         [3] = {
@@ -945,7 +945,7 @@ return {
             ["Task"] = {
                 ["Cake Queen"] = 1
             },
-            ["Name"] = [=[Cake Queen]=],
+            ["Name"] = "Cake Queen",
             ["LevelReq"] = 2175
         }
     },
@@ -958,7 +958,7 @@ return {
             ["Task"] = {
                 ["Military Soldier"] = 7
             },
-            ["Name"] = [=[Mil. Soldier]=],
+            ["Name"] = "Mil. Soldier",
             ["LevelReq"] = 300
         },
         [2] = {
@@ -969,7 +969,7 @@ return {
             ["Task"] = {
                 ["Military Spy"] = 8
             },
-            ["Name"] = [=[Mil. Spy]=],
+            ["Name"] = "Mil. Spy",
             ["LevelReq"] = 325
         },
         [3] = {
@@ -980,7 +980,7 @@ return {
             ["Task"] = {
                 ["Magma Admiral"] = 1
             },
-            ["Name"] = [=[Magma Admiral]=],
+            ["Name"] = "Magma Admiral",
             ["LevelReq"] = 350
         }
     },
@@ -993,7 +993,7 @@ return {
             ["Task"] = {
                 ["Peanut Scout"] = 8
             },
-            ["Name"] = [=[Peanut Scout]=],
+            ["Name"] = "Peanut Scout",
             ["LevelReq"] = 2075
         },
         [2] = {
@@ -1004,7 +1004,7 @@ return {
             ["Task"] = {
                 ["Peanut President"] = 8
             },
-            ["Name"] = [=[Peanut President]=],
+            ["Name"] = "Peanut President",
             ["LevelReq"] = 2100
         }
     },
@@ -1017,7 +1017,7 @@ return {
             ["Task"] = {
                 ["Ship Steward"] = 8
             },
-            ["Name"] = [=[Ship Steward]=],
+            ["Name"] = "Ship Steward",
             ["LevelReq"] = 1300
         },
         [2] = {
@@ -1028,7 +1028,7 @@ return {
             ["Task"] = {
                 ["Ship Officer"] = 8
             },
-            ["Name"] = [=[Ship Officer]=],
+            ["Name"] = "Ship Officer",
             ["LevelReq"] = 1325
         }
     },
@@ -1041,7 +1041,7 @@ return {
             ["Task"] = {
                 ["Trainee"] = 5
             },
-            ["Name"] = [=[Trainees]=],
+            ["Name"] = "Trainees",
             ["LevelReq"] = 0
         }
     },
@@ -1054,7 +1054,7 @@ return {
             ["Task"] = {
                 ["Toga Warrior"] = 7
             },
-            ["Name"] = [=[Toga Warrior]=],
+            ["Name"] = "Toga Warrior",
             ["LevelReq"] = 250
         },
         [2] = {
@@ -1065,7 +1065,7 @@ return {
             ["Task"] = {
                 ["Gladiator"] = 8
             },
-            ["Name"] = [=[Gladiator]=],
+            ["Name"] = "Gladiator",
             ["LevelReq"] = 275
         }
     },
@@ -1078,7 +1078,7 @@ return {
             ["Task"] = {
                 ["Lab Subordinate"] = 8
             },
-            ["Name"] = [=[Lab Subordinate]=],
+            ["Name"] = "Lab Subordinate",
             ["LevelReq"] = 1100
         },
         [2] = {
@@ -1089,7 +1089,7 @@ return {
             ["Task"] = {
                 ["Horned Warrior"] = 9
             },
-            ["Name"] = [=[Horned Warrior]=],
+            ["Name"] = "Horned Warrior",
             ["LevelReq"] = 1125
         },
         [3] = {
@@ -1100,7 +1100,7 @@ return {
             ["Task"] = {
                 ["Smoke Admiral"] = 1
             },
-            ["Name"] = [=[Smoke Admiral]=],
+            ["Name"] = "Smoke Admiral",
             ["LevelReq"] = 1150
         }
     },
@@ -1113,7 +1113,7 @@ return {
             ["Task"] = {
                 ["Royal Squad"] = 8
             },
-            ["Name"] = [=[Royal Squad]=],
+            ["Name"] = "Royal Squad",
             ["LevelReq"] = 525
         },
         [2] = {
@@ -1124,7 +1124,7 @@ return {
             ["Task"] = {
                 ["Royal Soldier"] = 8
             },
-            ["Name"] = [=[Royal Soldier]=],
+            ["Name"] = "Royal Soldier",
             ["LevelReq"] = 550
         },
         [3] = {
@@ -1135,7 +1135,7 @@ return {
             ["Task"] = {
                 ["Thunder God"] = 1
             },
-            ["Name"] = [=[Thunder God]=],
+            ["Name"] = "Thunder God",
             ["LevelReq"] = 575
         }
     },
@@ -1148,7 +1148,7 @@ return {
             ["Task"] = {
                 ["Chief Petty Officer"] = 8
             },
-            ["Name"] = [=[Chief Petty Officer]=],
+            ["Name"] = "Chief Petty Officer",
             ["LevelReq"] = 120
         },
         [2] = {
@@ -1159,7 +1159,7 @@ return {
             ["Task"] = {
                 ["Vice Admiral"] = 1
             },
-            ["Name"] = [=[Vice Admiral]=],
+            ["Name"] = "Vice Admiral",
             ["LevelReq"] = 130
         }
     },
@@ -1172,7 +1172,7 @@ return {
             ["Task"] = {
                 ["Hydra Enforcer"] = 8
             },
-            ["Name"] = [=[Hydra Enforcer]=],
+            ["Name"] = "Hydra Enforcer",
             ["LevelReq"] = 1625
         },
         [2] = {
@@ -1183,7 +1183,7 @@ return {
             ["Task"] = {
                 ["Venomous Assailant"] = 8
             },
-            ["Name"] = [=[Venomous Assailant]=],
+            ["Name"] = "Venomous Assailant",
             ["LevelReq"] = 1650
         },
         [3] = {
@@ -1194,7 +1194,7 @@ return {
             ["Task"] = {
                 ["Hydra Leader"] = 1
             },
-            ["Name"] = [=[Hydra Leader]=],
+            ["Name"] = "Hydra Leader",
             ["LevelReq"] = 1675
         }
     },
@@ -1207,7 +1207,7 @@ return {
             ["Task"] = {
                 ["Dragon Crew Warrior"] = 8
             },
-            ["Name"] = [=[Dragon Crew Warrior]=],
+            ["Name"] = "Dragon Crew Warrior",
             ["LevelReq"] = 1575
         },
         [2] = {
@@ -1218,7 +1218,7 @@ return {
             ["Task"] = {
                 ["Dragon Crew Archer"] = 8
             },
-            ["Name"] = [=[Dragon Crew Archer]=],
+            ["Name"] = "Dragon Crew Archer",
             ["LevelReq"] = 1600
         }
     },
@@ -1231,7 +1231,7 @@ return {
             ["Task"] = {
                 ["Pirate Millionaire"] = 8
             },
-            ["Name"] = [=[Pirate Millionaire]=],
+            ["Name"] = "Pirate Millionaire",
             ["LevelReq"] = 1500
         },
         [2] = {
@@ -1242,7 +1242,7 @@ return {
             ["Task"] = {
                 ["Pistol Billionaire"] = 8
             },
-            ["Name"] = [=[Pistol Billionaire]=],
+            ["Name"] = "Pistol Billionaire",
             ["LevelReq"] = 1525
         },
         [3] = {
@@ -1253,7 +1253,7 @@ return {
             ["Task"] = {
                 ["Stone"] = 1
             },
-            ["Name"] = [=[Stone]=],
+            ["Name"] = "Stone",
             ["LevelReq"] = 1550
         }
     },
@@ -1266,7 +1266,7 @@ return {
             ["Task"] = {
                 ["High Disciple"] = 8
             },
-            ["Name"] = [=[High Disciple]=],
+            ["Name"] = "High Disciple",
             ["LevelReq"] = 2675
         },
         [2] = {
@@ -1277,7 +1277,7 @@ return {
             ["Task"] = {
                 ["Grand Devotee"] = 8
             },
-            ["Name"] = [=[Grand Devotee]=],
+            ["Name"] = "Grand Devotee",
             ["LevelReq"] = 2700
         }
     },
@@ -1290,7 +1290,7 @@ return {
             ["Task"] = {
                 ["Ship Deckhand"] = 8
             },
-            ["Name"] = [=[Ship Deckhand]=],
+            ["Name"] = "Ship Deckhand",
             ["LevelReq"] = 1250
         },
         [2] = {
@@ -1301,7 +1301,7 @@ return {
             ["Task"] = {
                 ["Ship Engineer"] = 8
             },
-            ["Name"] = [=[Ship Engineer]=],
+            ["Name"] = "Ship Engineer",
             ["LevelReq"] = 1275
         }
     },
@@ -1314,7 +1314,7 @@ return {
             ["Task"] = {
                 ["Snow Trooper"] = 8
             },
-            ["Name"] = [=[Snow Trooper]=],
+            ["Name"] = "Snow Trooper",
             ["LevelReq"] = 1000
         },
         [2] = {
@@ -1325,15 +1325,15 @@ return {
             ["Task"] = {
                 ["Winter Warrior"] = 9
             },
-            ["Name"] = [=[Winter Warrior]=],
+            ["Name"] = "Winter Warrior",
             ["LevelReq"] = 1050
         }
     },
     ["BartiloQuest"] = {
         [1] = {
-            ["MeetsRequirements"] = function()end --[[function: 0xa1b41e1ec9997b15]],
-            ["Name"] = [=[Swan's Raid]=],
-            ["OnComplete"] = function()end --[[function: 0xd15707d5bfe98475]],
+            ["MeetsRequirements"] = function() --[[function: 0xb44f2c2b4dfe0c11]] end,
+            ["Name"] = "Swan's Raid",
+            ["OnComplete"] = function() --[[function: 0xc60995c624944a91]] end,
             ["Reward"] = {
                 ["Exp"] = 35000000,
                 ["Beli"] = 50000
@@ -1353,7 +1353,7 @@ return {
             ["Task"] = {
                 ["God's Guard"] = 7
             },
-            ["Name"] = [=[God's Guard]=],
+            ["Name"] = "God's Guard",
             ["LevelReq"] = 450
         },
         [2] = {
@@ -1364,7 +1364,7 @@ return {
             ["Task"] = {
                 ["Shanda"] = 9
             },
-            ["Name"] = [=[Shanda]=],
+            ["Name"] = "Shanda",
             ["LevelReq"] = 475
         },
         [3] = {
@@ -1375,7 +1375,7 @@ return {
             ["Task"] = {
                 ["Wysper"] = 1
             },
-            ["Name"] = [=[Wysper]=],
+            ["Name"] = "Wysper",
             ["LevelReq"] = 500
         }
     },
@@ -1388,7 +1388,7 @@ return {
             ["Task"] = {
                 ["Pirate"] = 8
             },
-            ["Name"] = [=[Pirates]=],
+            ["Name"] = "Pirates",
             ["LevelReq"] = 30
         },
         [2] = {
@@ -1399,7 +1399,7 @@ return {
             ["Task"] = {
                 ["Brute"] = 8
             },
-            ["Name"] = [=[Brute]=],
+            ["Name"] = "Brute",
             ["LevelReq"] = 40
         },
         [3] = {
@@ -1410,7 +1410,7 @@ return {
             ["Task"] = {
                 ["Chef"] = 1
             },
-            ["Name"] = [=[Chef]=],
+            ["Name"] = "Chef",
             ["LevelReq"] = 55
         }
     }
