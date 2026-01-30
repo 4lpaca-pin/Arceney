@@ -31,10 +31,18 @@ getcustomasset = getcustomasset or getsynasset or function(f) return "" end;
 _G = _G or getgenv();
 
 if Drawing then
+	if setreadonly then
+		setreadonly(Drawing,false);
+	end;
+
 	Drawing.clear = Drawing.clear or Drawing.Clear or cleardrawcache or cleardawcache or clear_draw_cache;
 end;
 
 if WebSocket then
+	if setreadonly then
+		setreadonly(WebSocket,false);
+	end;
+
 	WebSocket.Connect = (WebSocket and WebSocket.connect) or (WebSocket and WebSocket.Connect) or (WebSocket and WebSocket.New);
 end;
 
