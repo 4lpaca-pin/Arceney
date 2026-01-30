@@ -1,5 +1,5 @@
 local ExternalReplace = {
-
+	['a2b4136acfe7328bf71a79e09208f9c5'] = "4af3140e536e9af460d157d2f5edba9a",
 };
 
 local GameClientData = {
@@ -29,13 +29,23 @@ gethiddenproperty = gethiddenproperty or get_hidden_property or get_hidden_prop;
 gethui = gethui or get_hidden_gui;
 getcustomasset = getcustomasset or getsynasset or function(f) return "" end;
 _G = _G or getgenv();
+isfolder = isfolder or function() end;
+makefolder = makefolder or function() end;
+delfolder = delfolder or function() end;
+listfiles = listfiles or function() end;
+writefile = writefile or function() end;
+readfile = readfile or function() end;
+appendfile = appendfile or function() end;
+isfile = isfile or function() end;
 
 if Drawing then
 	if setreadonly then
 		setreadonly(Drawing,false);
 	end;
 
-	Drawing.clear = Drawing.clear or Drawing.Clear or cleardrawcache or cleardawcache or clear_draw_cache;
+	pcall(function()
+		Drawing.clear = Drawing.clear or Drawing.Clear or cleardrawcache or cleardawcache or clear_draw_cache;
+	end)
 end;
 
 if WebSocket then
@@ -43,31 +53,42 @@ if WebSocket then
 		setreadonly(WebSocket,false);
 	end;
 
-	WebSocket.Connect = (WebSocket and WebSocket.connect) or (WebSocket and WebSocket.Connect) or (WebSocket and WebSocket.New);
+	pcall(function()
+		WebSocket.Connect = (WebSocket and WebSocket.connect) or (WebSocket and WebSocket.Connect) or (WebSocket and WebSocket.New);
+	end);
 end;
 
 if not isfolder("Arceney.cc") then
-    makefolder("Arceney.cc");
+	makefolder("Arceney.cc");
 end;
 
 if not isfolder("Arceney-bin") then
-    makefolder("Arceney-bin");
+	makefolder("Arceney-bin");
 end;
 
 if not isfolder("Arceney-Cache") then
-    makefolder("Arceney-Cache");
+	makefolder("Arceney-Cache");
 end;
 
 local Loader = {};
 
 local LocalPlayer = game:GetService('Players').LocalPlayer;
-local LuarmorAPI = loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))()
+local LuarmorAPI;
+	
+xpcall(function()
+	LuarmorAPI = loadstring(game:HttpGet("https://sdkapi-public.luarmor.net/library.lua"))();
+end,function()
+	LuarmorAPI = {}
+end)
+
 local LicenseKeyPath = "Arceney.env";
 
 Loader.CoreGui = (gethui and gethui()) or game:FindFirstChild('CoreGui') or LocalPlayer.PlayerGui;
 
 if not GameClientData[game.GameId] then
-	return LocalPlayer:Kick("Arceney\nKicked for Security Reasons");
+	if not game:GetService('RunService'):IsStudio() then
+		return LocalPlayer:Kick("Arceney\nKicked for Security Reasons");
+	end;
 end;
 
 Loader.Is_Key_Valid = function(data)
@@ -80,14 +101,16 @@ Loader.Is_Key_Valid = function(data)
 	if status.code == "KEY_VALID" then
 
 		writefile(LicenseKeyPath , data);
-	
+
 		return data , status.code;
 	end;
 
 	return false , status.code;
 end;
 
-Loader.Render = function()
+local IsUseExt = isfile('arceney_use_legacy') or false;
+
+Loader.Render = function(defaulk)
 	local ScreenGui = Instance.new("ScreenGui")
 	local Frame = Instance.new("Frame")
 	local BxDFrame = Instance.new("Frame")
@@ -108,7 +131,39 @@ Loader.Render = function()
 	ScreenGui.ResetOnSpawn = false
 	ScreenGui.IgnoreGuiInset = true;
 	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+	
+	local SwitchVersion = Instance.new("TextButton")
+	local UIStroke = Instance.new("UIStroke")
 
+	SwitchVersion.Name = "SwitchVersion"
+	SwitchVersion.Parent = Frame
+	SwitchVersion.AnchorPoint = Vector2.new(0.5, 0)
+	SwitchVersion.BackgroundColor3 = Color3.fromRGB(34, 34, 34)
+	SwitchVersion.BorderColor3 = Color3.fromRGB(11, 11, 11)
+	SwitchVersion.BorderSizePixel = 2
+	SwitchVersion.Position = UDim2.new(0.5, 0, 0, 100)
+	SwitchVersion.Size = UDim2.new(0, 200, 0, 30)
+	SwitchVersion.ZIndex = 8
+	SwitchVersion.Font = Enum.Font.Code
+	SwitchVersion.Text = "Change Version: Default"
+	SwitchVersion.TextColor3 = Color3.fromRGB(255, 255, 255)
+	SwitchVersion.TextSize = 14.000
+
+	UIStroke.Transparency = 0.250
+	UIStroke.Color = Color3.fromRGB(59, 59, 59)
+	UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	UIStroke.Parent = SwitchVersion
+	
+	SwitchVersion.MouseButton1Click:Connect(function()
+		IsUseExt = not IsUseExt;
+		
+		if IsUseExt then
+			SwitchVersion.Text = "Change Version: Legacy"
+		else
+			SwitchVersion.Text = "Change Version: Default"
+		end;
+	end);
+	
 	Frame.Parent = ScreenGui
 	Frame.AnchorPoint = Vector2.new(0.5, 0.5)
 	Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
@@ -190,7 +245,7 @@ Loader.Render = function()
 	TextBox.Font = Enum.Font.Code
 	TextBox.PlaceholderColor3 = Color3.fromRGB(102, 102, 102)
 	TextBox.PlaceholderText = "License Key"
-	TextBox.Text = ""
+	TextBox.Text = (defaulk and tostring(defaulk)) or ""
 	TextBox.TextColor3 = Color3.fromRGB(213, 213, 213)
 	TextBox.TextSize = 13.000
 	TextBox.TextStrokeTransparency = 0.300
@@ -236,60 +291,66 @@ Loader.Render = function()
 
 	UIStroke_5.Color = Color3.fromRGB(59, 59, 59)
 	UIStroke_5.Parent = Frame
-	
+
 	GetKeyButton.MouseButton1Click:Connect(function()
 		setclipboard("https://arceney.win/#plans");
 	end);
-	
+
 	local Await = Instance.new('BindableEvent',ScreenGui);
 	local RateLimit = false;
-	
+
 	LogInButton.MouseButton1Click:Connect(function()
 		if RateLimit then
 			return;
 		end
-		
+
 		RateLimit = true
-		
+
 		local fixer = TextBox.Text:gsub(' ','');
 		local correct = Loader.Is_Key_Valid(fixer);
 
 		if correct then
 			return Await:Fire(fixer);
 		end;
-		
+
 		TextBox.Text = "";
-		
+
 		RateLimit = false;
 	end);
-	
+
 	local c = Await.Event:Wait();
-	
+
 	ScreenGui:Destroy();
-	
+
 	return c;
 end;
 
 local is_external = function()
-    if debug.info(writefile,'s') ~= '[C]' or debug.info(readfile,'s') ~= '[C]' or debug.info(isfile,'s') ~= '[C]' then
-        return true;
-    end;
+	if debug.info(writefile,'s') ~= '[C]' or debug.info(readfile,'s') ~= '[C]' or debug.info(isfile,'s') ~= '[C]' then
+		return true;
+	end;
 
-    if not hookmetamethod then
-        return true;
-    end;
+	if not hookmetamethod then
+		return true;
+	end;
 end;
 
 local ProcessLoad = function(key)
 	local Id = GameClientData[game.GameId];
 
-    if is_external() and ExternalReplace[Id] then
-        Id = ExternalReplace[Id];
-        LuarmorAPI.script_id = Id;
-    end;
-	
+	if IsUseExt and ExternalReplace[Id] then
+		writefile("arceney_use_legacy",'true');
+		
+		Id = ExternalReplace[Id];
+		LuarmorAPI.script_id = Id;
+	else
+		if isfile("arceney_use_legacy") then
+			delfile("arceney_use_legacy");
+		end;
+	end;
+
 	local LoaderCode = string.format("https://api.luarmor.net/files/v3/loaders/%s.lua",Id);
-	
+
 	getgenv().script_key = key;
 	getfenv().script_key = key;
 	script_key = key;
@@ -301,10 +362,10 @@ LuarmorAPI.script_id = tostring(GameClientData[game.GameId]);
 
 script_key = script_key or (isfile(LicenseKeyPath) and readfile(LicenseKeyPath)) or (isfile("Arceney.license") and readfile("Arceney.license"));
 
-if script_key and Loader.Is_Key_Valid(tostring(script_key)) then
+if script_key and Loader.Is_Key_Valid(tostring(script_key)) and not isfile("arceney_use_legacy") then
 	ProcessLoad(script_key);
 else
-	local license = Loader.Render();
-	
+	local license = Loader.Render(script_key);
+
 	ProcessLoad(license);
 end;
