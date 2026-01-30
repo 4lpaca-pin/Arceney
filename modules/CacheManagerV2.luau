@@ -27,7 +27,10 @@ end;
 
 local fetch = function(url: string)
 	local x,p = pcall(function()
-		return game:HttpGet(url);
+		return request({
+			Url = url,
+			Method = "GET"
+		}).Body;
 	end);
 	
 	if x then
@@ -85,5 +88,7 @@ function lib.clear_cache(url: string)
 	
 	return false;
 end;
+
+lib.init();
 
 return lib;
