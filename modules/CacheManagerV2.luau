@@ -27,10 +27,7 @@ end;
 
 local fetch = function(url: string)
 	local x,p = pcall(function()
-		return request({
-			Url = url,
-			Method = "GET"
-		}).Body;
+		return game:HttpGet(url);
 	end);
 	
 	if x then
