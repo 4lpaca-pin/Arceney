@@ -1,0 +1,15 @@
+{
+    "LogoRbx": "rbxassetid://123405453356557",
+    "StaticLogo": "https://arceney.win/static/logo-asset.png",
+    "SoundAssets": "https://github.com/4lpaca-pin/Arceney/raw/refs/heads/main/assets/sounds/",
+    "DiscordInvite": "https://discord.gg/ByC6NBUW5U",
+    "Status": {
+        "Script": true,
+        "External": false,
+        "LinuxInternal": false
+    },
+    "repo": "https://github.com/4lpaca-pin/Arceney",
+    "rscript": "https://rscripts.net/@4lpacaLoL",
+    "scriptblox": "https://scriptblox.com/u/4lpacaLoL"
+
+}
