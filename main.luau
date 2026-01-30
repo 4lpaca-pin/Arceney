@@ -163,6 +163,12 @@ Loader.Render = function(defaulk)
 			SwitchVersion.Text = "Change Version: Default"
 		end;
 	end);
+
+	if IsUseExt then
+		SwitchVersion.Text = "Change Version: Legacy"
+	else
+		SwitchVersion.Text = "Change Version: Default"
+	end;
 	
 	Frame.Parent = ScreenGui
 	Frame.AnchorPoint = Vector2.new(0.5, 0.5)
