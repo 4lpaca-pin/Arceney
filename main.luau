@@ -350,6 +350,10 @@ local ProcessLoad = function(key)
 		Id = ExternalReplace[Id];
 		LuarmorAPI.script_id = Id;
 	else
+		if identifyexecutor() == "Xeno" then
+			return game:GetService('Players').LocalPlayer:Kick("Sorry!\nXeno is out of support.\nplease use solara or other executor in weao.gg");
+		end;
+
 		if isfile("arceney_use_legacy") then
 			delfile("arceney_use_legacy");
 		end;
