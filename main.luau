@@ -9,6 +9,7 @@ local GameClientData = {
 	[5750914919] = "33aed7d464e90ab9943d58f21cd24d00", -- Fisch
 	[4777817887] = "490997958adf82e81ac160016a0ef119", -- Blade Ball
 	[115797356] = "fa807cf60ed10c3e0e43f0acd8e7b6d5", -- Counter Blox
+	[9363735110] = "5272dda0f4c8a44af59cf11f83ce8a5c", Tsunami Brainrot
 };
 
 cloneref = cloneref or function(s) return s; end;
