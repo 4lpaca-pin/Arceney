@@ -1,5 +1,5 @@
 local ExternalReplace = {
-	['a2b4136acfe7328bf71a79e09208f9c5'] = "4af3140e536e9af460d157d2f5edba9a",
+	['a2b4136acfe7328bf71a79e09208f9c5'] = "4af3140e536e9af460d157d2f5edba9a", -- replace blox fruit
 };
 
 local GameClientData = {
