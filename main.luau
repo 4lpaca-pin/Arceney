@@ -1,3 +1,7 @@
+------------------------------------------------------------------------------------------------------------- ARCENEY LOADER ----------------------------------------------------------------------------------------------------------
+-- Author: 4lpaca
+
+
 local ExternalReplace = {
 	['a2b4136acfe7328bf71a79e09208f9c5'] = "4af3140e536e9af460d157d2f5edba9a", -- replace blox fruit
 };
@@ -351,7 +355,6 @@ local ProcessLoad = function(key)
 		Id = ExternalReplace[Id];
 		LuarmorAPI.script_id = Id;
 	else
-
 		if isfile("arceney_use_legacy") then
 			delfile("arceney_use_legacy");
 		end;
@@ -377,3 +380,5 @@ else
 
 	ProcessLoad(license);
 end;
+
+------------------------------------------------------------------------------------------------------------- ARCENEY LOADER ----------------------------------------------------------------------------------------------------------
