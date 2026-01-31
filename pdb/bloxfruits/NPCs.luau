@@ -1,3 +1,5 @@
+-- This NPCs Data was dump by 4lpaca
+
 return {
     World1 = {
         ["Area1Quest"] = {
@@ -10,7 +12,7 @@ return {
             ["NPCPosition"] = Vector3.new(-1580.0469970703125, 6.350006103515625, -2986.47509765625)
         },
         ["SkyExp1Quest"] = {
-            ["NPCPosition"] = Vector3.new(-4721.88916015625, 843.875, -1949.9659423828125)
+            ["NPCPosition"] = Vector3.new(-7859.09814453125, 5544.18994140625, -381.47601318359375)
         },
         ["SkyExp2Quest"] = {
             ["NPCPosition"] = Vector3.new(-7904.68505859375, 5634.6611328125, -1409.967041015625)
