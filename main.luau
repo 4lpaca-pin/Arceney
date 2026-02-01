@@ -200,6 +200,13 @@ else
     end;
 
     local oldkey = Loader.GetKey_var() or "";
+    local code_s = {
+        KEY_EXPRIED = "Key expired",
+        KEY_BANNED = "User is banned",
+        KEY_HWID_LOCKED = "Invalid HWID",
+        KEY_INCORRECT = "Incorrect Key",
+        KEY_INVALID = "Invalid Key",
+    };
 
     local LoaderInterface = NeverLoseUI.new({
         Name = "Arceney",
@@ -223,11 +230,13 @@ else
             setclipboard("https://arceney.win/#plans");
         end,
         OnRedeem = function(key)
-            if Loader.Is_Key_Valid(key) then
+            local status , reason = Loader.Is_Key_Valid(key);
+
+            if status then
                 return true;
             end;
-
-            return false;
+            
+            return false , code_s[reason] or nil;
         end,
     });
 
