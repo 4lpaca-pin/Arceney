@@ -168,11 +168,22 @@ Loader.Is_Key_Valid = function(data)
 		return false , 'KEY_INVALID';
 	end;
 
-	local status = LuarmorAPI.check_key(data);
+    LuarmorAPI.script_id = GameClientData[game.GameId];
+
+	local err, status = pcall(LuarmorAPI.check_key ,data);
+
+    if not err then -- Instant load
+        pcall(writefile ,LicenseKeyPath , data);
+
+        getgenv().script_key = data;
+        getfenv().script_key = data;
+        script_key = data;
+
+		return data , status.code;
+    end;
 
 	if status.code == "KEY_VALID" then
-
-		writefile(LicenseKeyPath , data);
+        pcall(writefile ,LicenseKeyPath , data);
 
         getgenv().script_key = data;
         getfenv().script_key = data;
@@ -218,7 +229,6 @@ else
                 Content = "Up to date scripts.",
                 Idx = "Default",
             },
-            
             {
                 Name = "Legacy Scripts",
                 Content = "Outdated scripts.",
