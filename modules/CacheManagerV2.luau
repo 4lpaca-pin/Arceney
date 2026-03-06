@@ -62,7 +62,19 @@ function lib.get_url(url: string, cache_time: number)
 	end;
 	
 	if isfolder(path) and isfile(path.."/config.json") and isfile(path.."/source.txt") and readfile(path.."/config.json") and readfile(path.."/source.txt") then
-		local cfg = game:GetService('HttpService'):JSONDecode(readfile(path.."/config.json"));
+		local cfg;
+
+        xpcall(function()
+            cfg = game:GetService('HttpService'):JSONDecode(readfile(path.."/config.json"));
+        end,function()
+            cfg = {
+                cache_time = -5,
+                duration = 1
+            };
+
+            pcall(lib.clear_cache , url)
+        end);
+
 		local source = readfile(path.."/source.txt");
 		
 		if (tick() - cfg.cache_time) > cfg.duration then
