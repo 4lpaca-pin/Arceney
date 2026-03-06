@@ -75,11 +75,11 @@ function lib.get_url(url: string, cache_time: number)
             pcall(lib.clear_cache , url)
         end);
 
-		local source = readfile(path.."/source.txt");
-		
 		if (tick() - cfg.cache_time) > cfg.duration then
 			return onload() , "false" , (tick() - timerequest);
 		else
+            local source = readfile(path.."/source.txt");
+            
 			return source , "true" , (tick() - timerequest);
 		end;
 	end;
