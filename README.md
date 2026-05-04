@@ -1,7 +1,7 @@
 # Arceney.win
 
 ## 🛡️ Loader
-- Get the script below and paste it into your executor
+- Get the script below and paste it into your executor or dx9ware lua
 ```lua
 local url = "https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main";
 local DX9WARELua = "BiteByNight"; -- "BiteByNight" , "Doors" , "SniperDuals" , "TheMimic"
