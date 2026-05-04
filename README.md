@@ -3,7 +3,15 @@
 ## 🛡️ Loader
 - Get the script below and paste it into your executor
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/main.luau"))()
+local url = "https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main";
+local DX9WARELua = "BiteByNight"; -- "BiteByNight" , "Doors" , "SniperDuals" , "TheMimic"
+
+if dx9 then
+    _G['DX9CACHE'..DX9WARELua] = _G['DX9CACHE'..DX9WARELua] or dx9.Get(url.."/dx9_lua/"..DX9WARELua..'.lua?h=1');
+    loadstring(_G['DX9CACHE'..DX9WARELua])();
+else
+    loadstring(game:HttpGet(url.."/main.luau"))();
+end;
 ```
 
 ### 🔐 Key / Whitelist
