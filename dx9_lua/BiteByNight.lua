@@ -11,9 +11,11 @@
 
 dx9.ShowConsole(false);
 
-local Self = dx9.get_localplayer();
+local success,Self = pcall(function()
+    return dx9.get_localplayer();
+end);
 
-local SelfName = Self.Info.Name;
+local SelfName = (success and Self.Info.Name) or nil;
 
 local dModelBase = dx9.GetDatamodel();
 
@@ -25,6 +27,13 @@ local PLAYERS_FOLDER = dx9.FindFirstChild(Workspace,'PLAYERS');
 local KILLER_FOLDER = dx9.FindFirstChild(PLAYERS_FOLDER,'KILLER');
 local ALIVE_FOLDER = dx9.FindFirstChild(PLAYERS_FOLDER,'ALIVE');
 local IGNORE_FOLDER = dx9.FindFirstChild(Workspace,'IGNORE');
+local GAME_FOLDER = dx9.FindFirstChild(Workspace,'GAME');
+
+local RegionValue = dx9.FindFirstChild(GAME_FOLDER,'Region')
+
+local server = (dx9.GetStringValue(RegionValue) == "(null)" and "SG | Singapore") or dx9.GetStringValue(RegionValue);
+
+dx9.DrawString({25,5},{255,255,255},"LUA BY 4lpaca - Server: "..server)
 
 local center_point = {
     x = dx9.size().width / 2,
@@ -96,31 +105,33 @@ for i,model in next , dx9.GetChildren(ALIVE_FOLDER) do
     end;
 end;
 
-local Killer = false;
-for i,model in next , dx9.GetChildren(KILLER_FOLDER) do
-    if dx9.GetName(model) ~= SelfName then
-        local root = dx9.FindFirstChild(model,'HumanoidRootPart');
+local Killer = false or SelfName == nil;
+if not Killer then
+    for i,model in next , dx9.GetChildren(KILLER_FOLDER) do
+        if dx9.GetName(model) ~= SelfName then
+            local root = dx9.FindFirstChild(model,'HumanoidRootPart');
 
-        local TargetPosition = dx9.GetPosition(root);
+            local TargetPosition = dx9.GetPosition(root);
 
-        local worldpoint = dx9.WorldToScreen({TargetPosition.x,TargetPosition.y + 4,TargetPosition.z});
-        local worldpoint2 = dx9.WorldToScreen({TargetPosition.x,TargetPosition.y - 4,TargetPosition.z});
+            local worldpoint = dx9.WorldToScreen({TargetPosition.x,TargetPosition.y + 4,TargetPosition.z});
+            local worldpoint2 = dx9.WorldToScreen({TargetPosition.x,TargetPosition.y - 4,TargetPosition.z});
 
-        local diff = (worldpoint2.y - worldpoint.y) / 4;
+            local diff = (worldpoint2.y - worldpoint.y) / 4;
 
-        dx9.DrawBox({
-            worldpoint.x - 6 - diff,
-            worldpoint.y - 10
-        },{
-            worldpoint2.x + 6 + diff,
-            worldpoint2.y + 10
-        },{255, 110, 110});
+            dx9.DrawBox({
+                worldpoint.x - 6 - diff,
+                worldpoint.y - 10
+            },{
+                worldpoint2.x + 6 + diff,
+                worldpoint2.y + 10
+            },{255, 110, 110});
 
-        if worldpoint.x > 0 and worldpoint.y > 0 then
-            dx9.DrawString({worldpoint.x - 10 - diff, worldpoint.y - diff},{255, 110, 110},"KILLER: "..tostring(dx9.GetName(model)))
+            if worldpoint.x > 0 and worldpoint.y > 0 then
+                dx9.DrawString({worldpoint.x - 10 - diff, worldpoint.y - diff},{255, 110, 110},"KILLER: "..tostring(dx9.GetName(model)))
+            end;
+        else
+            Killer = true;
         end;
-    else
-        Killer = true;
     end;
 end;
 
@@ -128,7 +139,6 @@ if IGNORE_FOLDER ~= 0 then
     local Dir = 15;
 
     -- TRAP ESP
-
     local esp_trap = function(trap)
         local TrapPart = dx9.FindFirstChild(trap,'Trap');
 
