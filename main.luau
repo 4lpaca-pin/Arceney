@@ -15,7 +15,12 @@ local GameClientData = {
 	--[5750914919] = "33aed7d464e90ab9943d58f21cd24d00", -- "Fisch"
 	--[4777817887] = "490997958adf82e81ac160016a0ef119", -- "Blade Ball"
 	--[115797356] = "fa807cf60ed10c3e0e43f0acd8e7b6d5", -- "Counter Blox"
-	[9363735110] = "5272dda0f4c8a44af59cf11f83ce8a5c", -- "Tsunami Brainrot"
+	[9363735110] = "5272dda0f4c8a44af59cf11f83ce8a5c", -- "Tsunami Brainrot",
+	[6739698191] = "59beb46e78338416860b7e824164975d", -- "Violence District"
+};
+
+local FreeScript = {
+    ["59beb46e78338416860b7e824164975d"] = true,
 };
 
 clonefunction = clonefunction or function(f) return f; end;
@@ -163,7 +168,13 @@ Loader.ForceLoad = function(key)
     loadstring(game:HttpGet(LoaderCode))();
 end;
 
+local IsKeyless = FreeScript[GameClientData[game.GameId]];
+
 Loader.Is_Key_Valid = function(data)
+    if IsKeyless then
+        return true, "Keyless";
+    end;
+
 	if not data or not string.byte(data) then
 		return false , 'KEY_INVALID';
 	end;
@@ -197,7 +208,7 @@ end;
 
 script_key = script_key or (isfile(LicenseKeyPath) and readfile(LicenseKeyPath)) or (isfile(OldLicensePath) and readfile(OldLicensePath));
 
-if script_key and Loader.Is_Key_Valid(tostring(script_key)) and not UseLegacy then
+if (script_key and Loader.Is_Key_Valid(tostring(script_key)) and not UseLegacy) or IsKeyless then
 	return Loader.ForceLoad(script_key);
 else
     xpcall(function()
