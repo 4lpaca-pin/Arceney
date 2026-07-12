@@ -270,6 +270,7 @@ dw.items = {
 	Square = function()
 		local frame = Instance.new('Frame');
 		
+		frame.Parent = DrawingBase
 		frame.Visible = false;
 		frame.BackgroundTransparency = 1;
 		
