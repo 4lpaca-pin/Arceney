@@ -2,7 +2,7 @@
 	Drawing library
 ]]
 
-local Core = game:FindFirstChild("CoreGui") or game:GetService('Players').LocalPlayer.PlayerGui;
+local Core = (gethui and gethui()) or game:FindFirstChild("CoreGui") or game:GetService('Players').LocalPlayer.PlayerGui;
 local DrawingBase = Instance.new('ScreenGui');
 local enc = game:GetService('EncodingService');
 
