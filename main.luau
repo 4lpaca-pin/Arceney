@@ -159,7 +159,7 @@ Loader.ForceLoad = function(key)
         end;
     end;
 
-    local LoaderCode = string.format("https://api.luarmor.net/files/v3/loaders/%s.lua",Id);
+    local LoaderCode = string.format("https://api.luarmor.net/files/v4/loaders/%s.lua",Id);
     
     getgenv().script_key = key;
 	getfenv().script_key = key;
