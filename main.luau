@@ -145,6 +145,12 @@ Loader.GetKey_var = function()
     return script_key or getgenv().script_key or _G.script_key or getfenv().script_key;
 end;
 
+local id_load = {
+    ['4af3140e536e9af460d157d2f5edba9a'] = "https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/cache/bloxfruits.lac",
+    ['a2b4136acfe7328bf71a79e09208f9c5'] = "https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/cache/bloxfruits.luau",
+    ['59beb46e78338416860b7e824164975d'] = "https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/cache/vd.luau",
+}
+
 Loader.ForceLoad = function(key)
     key = key or Loader.GetKey_var() or "idk";
 
@@ -159,19 +165,17 @@ Loader.ForceLoad = function(key)
         end;
     end;
 
-    local LoaderCode = string.format("https://api.luarmor.net/files/v4/loaders/%s.lua",Id);
-    
     getgenv().script_key = key;
 	getfenv().script_key = key;
 	script_key = key;
 
-    loadstring(game:HttpGet(LoaderCode))();
+    loadstring(game:HttpGet(id_load[Id]))();
 end;
 
 local IsKeyless = FreeScript[GameClientData[game.GameId]];
 
 Loader.Is_Key_Valid = function(data)
-    if IsKeyless then
+    --[[if IsKeyless then
         return true, "Keyless";
     end;
 
@@ -203,12 +207,15 @@ Loader.Is_Key_Valid = function(data)
 		return data , status.code;
 	end;
 
-	return false , status.code;
+	return false , status.code;]]
+
+    return true;
 end;
 
-script_key = script_key or (isfile(LicenseKeyPath) and readfile(LicenseKeyPath)) or (isfile(OldLicensePath) and readfile(OldLicensePath));
+--script_key = script_key or (isfile(LicenseKeyPath) and readfile(LicenseKeyPath)) or (isfile(OldLicensePath) and readfile(OldLicensePath));
+local access = (script_key and Loader.Is_Key_Valid(tostring(script_key)) and not UseLegacy) or IsKeyless;
 
-if (script_key and Loader.Is_Key_Valid(tostring(script_key)) and not UseLegacy) or IsKeyless then
+if true then
 	return Loader.ForceLoad(script_key);
 else
     xpcall(function()
