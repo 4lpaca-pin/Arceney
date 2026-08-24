@@ -27,6 +27,11 @@ clonefunction = clonefunction or function(f) return f; end;
 identifyexecutor = identifyexecutor or getexecutorname or function()
 	return "Seliware", 0.1;
 end;
+
+if identifyexecutor() == "Xeno" then
+	require = error; -- stupid shit external
+end;
+
 getgenv = getgenv or getfenv;
 cloneref = cloneref or function(i) return i end;
 getconstant = getconstant or debug.getconstant;
